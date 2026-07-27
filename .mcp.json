@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "simple-product-feeds": {
+      "type": "http",
+      "url": "https://app.simpleproductfeeds.com/v1/mcp",
+      "headers": {
+        "Authorization": "Bearer ${SPF_API_KEY}"
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "simpleproductfeeds",
+  "description": "Simple Product Feeds — agent skills and MCP access for Shopify product feed management.",
+  "owner": {
+    "name": "Simple Product Feeds",
+    "url": "https://github.com/simpleproductfeeds"
+  },
+  "plugins": [
+    {
+      "name": "simple-product-feeds",
+      "source": "./",
+      "description": "Feed-ops skill + remote MCP server config: diagnose, trace, fix (preview-first), publish, and verify Shopify product feeds across Google Merchant Center, Commission Junction, and more."
+    }
+  ]
+}

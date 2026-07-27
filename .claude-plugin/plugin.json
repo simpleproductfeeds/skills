@@ -1,0 +1,13 @@
+{
+  "name": "simple-product-feeds",
+  "version": "1.0.0",
+  "description": "Operate Shopify product feeds from your agent: diagnose feed health, trace any row through the transformation pipeline, fix with preview-first writes, publish, and verify — via the Simple Product Feeds remote MCP server (14 tools) and bundled feed-ops skill.",
+  "author": {
+    "name": "Simple Product Feeds",
+    "url": "https://www.simpleproductfeeds.com"
+  },
+  "homepage": "https://www.simpleproductfeeds.com/docs/api/agents",
+  "repository": "https://github.com/simpleproductfeeds/skills",
+  "license": "MIT",
+  "keywords": ["shopify", "product-feeds", "google-shopping", "merchant-center", "mcp", "feed-management"]
+}
