@@ -43,7 +43,24 @@ restores. Both report which output columns the edit feeds
 "Label products by price band / margin tier / season for bidding."
 → bulk pattern: rules writing `[G]custom_label_N`.
 → specific products: `spf_set_overrides` with `custom_labels`.
+→ margin tiers specifically: use `spf_set_margin_tiers` (next recipe) — it
+manages the tier rules as a set for you.
 Labels never affect approval — safe to iterate.
+
+## Margin tiers from broad guidance (no per-SKU cost needed)
+
+"Skincare runs ~high margin, clearance is thin — bid by margin tier."
+→ `spf_set_margin_tiers` by **category**: turn the merchant's broad
+guidance into tiers keyed on a source field (product_type / vendor / tags)
+written to a `custom_label` slot — e.g. `high_margin` when `product_type in
+(Serums, Moisturizers)`. **No per-item cost data required** — this is the
+common case, since most shops don't track cost. If the shop DOES track cost,
+use **band** tiers over computed margin % instead; the response's
+`cost_coverage` tells you how usable bands are (with_cost / total).
+→ `spf_run_feed` (regenerate) → confirm a product with `spf_debug_row`,
+which names the assigned margin tier (margin → label → slot). Idempotent:
+re-running replaces the tiers; `clear: true` removes them. Margin-tier rules
+are managed here, not in the generic rule tools.
 
 ## New channel launch
 

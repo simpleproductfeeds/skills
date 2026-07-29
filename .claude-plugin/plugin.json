@@ -1,7 +1,7 @@
 {
   "name": "simple-product-feeds",
-  "version": "1.0.0",
-  "description": "Operate Shopify product feeds from your agent: diagnose feed health, trace any row through the transformation pipeline, fix with preview-first writes, publish, and verify — via the Simple Product Feeds remote MCP server (14 tools) and bundled feed-ops skill.",
+  "version": "1.1.0",
+  "description": "Operate Shopify product feeds from your agent: diagnose feed health, trace any row through the transformation pipeline, fix with preview-first writes, publish, and verify — via the Simple Product Feeds remote MCP server (15 tools) and bundled feed-ops skill.",
   "author": {
     "name": "Simple Product Feeds",
     "url": "https://www.simpleproductfeeds.com"

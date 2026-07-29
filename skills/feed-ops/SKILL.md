@@ -13,7 +13,7 @@ description: >-
 # Simple Product Feeds — feed operations
 
 Simple Product Feeds (SPF) is a Shopify feed-management app that exposes its
-entire capability to agents: a remote MCP server (14 tools) plus a full REST
+entire capability to agents: a remote MCP server (15 tools) plus a full REST
 API. You diagnose, fix, publish, and verify product feeds in one loop —
 nothing here requires the app's UI.
 
@@ -40,7 +40,7 @@ This skill is intentionally thin. The server carries the current contract
 and updates the moment SPF deploys, so when in doubt, read:
 
 - Tool list + server instructions: arrive automatically with the MCP
-  connection (14 tools as of 2026-07; the list you receive is current).
+  connection (15 tools as of 2026-07; the list you receive is current).
 - Docs index for agents: <https://www.simpleproductfeeds.com/llms.txt>
 - Any docs page as markdown: append `.md`, e.g.
   <https://www.simpleproductfeeds.com/docs/api/agents.md>
@@ -63,6 +63,8 @@ and updates the moment SPF deploys, so when in doubt, read:
    - one-off source cells → `spf_set_cells` (null restores; `preview: true`
      dry-runs)
    - which source column feeds an output column → `spf_update_mappings`
+   - margin-tier custom labels for bidding → `spf_set_margin_tiers` (by
+     product category = no cost data needed, or by computed margin band)
 4. **Publish**: `spf_run_feed` (mode: regenerate), poll mode: status until
    completed. `spf_sync_channel` pushes/notifies the channel itself.
 5. **Verify**: re-check `spf_feed_health` / `spf_debug_row`. Close the loop

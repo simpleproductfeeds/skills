@@ -19,7 +19,9 @@ explains every "why does this value look like that" question — and
 5. **Translations** (language feeds) and **AI categorization** (fills a
    blank google_product_category when enabled).
 6. **Merchant rules** — the feed's rule list (exclude / set / replace)
-   applies, in order.
+   applies, in order. **Margin-tier custom labels ride here**: they are
+   ordinary set-rules over a computed margin field, but managed as a set by
+   `spf_set_margin_tiers` (not the generic rule tools).
 7. **Validation + channel rendering** — normalization (gender/category),
    then the channel renderer produces the final output format.
 
@@ -36,6 +38,10 @@ explains every "why does this value look like that" question — and
   (before mapping); `[G]column` reads the mapped OUTPUT row. Example DSL:
   `Exclude when [D]title contains Sample` ·
   `Set [G]title to NEW | + [D]title`.
+- **Some `[D]` fields are computed, not raw source columns.**
+  `canonical_margin_pct` (margin % derived from cost + price) is usable in
+  rule conditions and by `spf_set_margin_tiers`, even though it is not a
+  spreadsheet/grid column. It reads nil when a product has no cost data.
 
 ## Known sharp edges
 
