@@ -48,6 +48,12 @@ explains every "why does this value look like that" question — and
 - Feed `id` and `mpn` commonly both read source `sku` — you cannot give
   them different values through cell edits; use a typed override (`mpn`) or
   a rule instead.
+- **Metafield columns are SOURCE columns named from the key only** —
+  `metafield-<key>` (product level) / `variant-metafield-<key>` (variant
+  level); the namespace never appears in the column name. They exist as soon
+  as configured but carry values only after the next product sync completes —
+  an empty metafield column right after configuring is lag, not a bug; check
+  `spf_configure_metafields` coverage before mapping or writing rules on it.
 - A few output columns are computed by the channel renderer from normalized
   canonical data (e.g. `shipping_weight` from a canonical weight) — cell
   edits to those source columns may not change the rendered output. Trust

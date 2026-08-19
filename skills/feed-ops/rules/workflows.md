@@ -62,6 +62,25 @@ which names the assigned margin tier (margin → label → slot). Idempotent:
 re-running replaces the tiers; `clear: true` removes them. Margin-tier rules
 are managed here, not in the generic rule tools.
 
+## Shopify metafield into the feed (product- or variant-level)
+
+"I keep our Google item ids in a variant metafield — get them into the feed."
+→ `spf_configure_metafields` with `include_discovery: true` first: it lists
+the metafield definitions that actually exist in the store, each with its
+level — configure from real data, never guess namespace/key. Then configure
+with the full desired list (`{namespace, key, level}`) and
+`trigger_extract: true`. **Sequencing is the whole trick**: the new column
+(`metafield-<key>` for product level, `variant-metafield-<key>` for variant)
+exists immediately but is EMPTY until the sync finishes. Poll by re-calling
+the tool with no arguments until `coverage` shows `with_value > 0` — the
+`sample_values` are your proof you're connected to the right data. THEN map
+with `spf_update_mappings` (or use `[D]metafield-<key>` in rules) and
+`spf_run_feed` → `spf_debug_row` to confirm the value in the output.
+Coverage of 0 after a sync = wrong level or typo — re-check discovery.
+Migration special case: mapping a metafield onto `id` changes every product
+identity at once; the feed-identity guard will hold the next publish for
+merchant confirmation — expected, tell the user to confirm the notice.
+
 ## New channel launch
 
 "What does channel X need that Google doesn't?"
