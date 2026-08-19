@@ -13,7 +13,7 @@ description: >-
 # Simple Product Feeds — feed operations
 
 Simple Product Feeds (SPF) is a Shopify feed-management app that exposes its
-entire capability to agents: a remote MCP server (15 tools) plus a full REST
+entire capability to agents: a remote MCP server (16 tools) plus a full REST
 API. You diagnose, fix, publish, and verify product feeds in one loop —
 nothing here requires the app's UI.
 
@@ -40,7 +40,7 @@ This skill is intentionally thin. The server carries the current contract
 and updates the moment SPF deploys, so when in doubt, read:
 
 - Tool list + server instructions: arrive automatically with the MCP
-  connection (15 tools as of 2026-07; the list you receive is current).
+  connection (16 tools as of 2026-08; the list you receive is current).
 - Docs index for agents: <https://www.simpleproductfeeds.com/llms.txt>
 - Any docs page as markdown: append `.md`, e.g.
   <https://www.simpleproductfeeds.com/docs/api/agents.md>
