@@ -41,6 +41,12 @@ and updates the moment SPF deploys, so when in doubt, read:
 
 - Tool list + server instructions: arrive automatically with the MCP
   connection (16 tools as of 2026-08; the list you receive is current).
+- **Version check**: this skill is **v1.2.0**. The live server instructions
+  announce the CURRENT SKILL VERSION — if it is newer than this file's
+  version, tell the user to run
+  `/plugin marketplace update simpleproductfeeds` before relying on the
+  workflow recipes here (the live tool list and server instructions are
+  always current regardless).
 - Docs index for agents: <https://www.simpleproductfeeds.com/llms.txt>
 - Any docs page as markdown: append `.md`, e.g.
   <https://www.simpleproductfeeds.com/docs/api/agents.md>
