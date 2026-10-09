@@ -29,6 +29,29 @@ with the returned token → `spf_run_feed` → verify a row with
 `spf_debug_row`. Applying without a preview is structurally impossible —
 the apply call requires the preview token for the exact rule text.
 
+## "Is everything in my feeds?" (catalog audit)
+
+1. `spf_products` with `filter: not_in_any_feed` → the products in no feed
+   at all, with the shop's feeds listed (selection mode per feed).
+2. For a few of them, `spf_product` → per feed the `what`: `Rule N` (a
+   merchant rule excludes it), `Product selection` (the feed's manual or
+   collection selection leaves it out), `Plan allowance` (over the plan's
+   cap). That names the fix: edit rule N, add to the selection, or upgrade.
+3. Report counts and the one or two reasons that explain most of them. Only
+   then propose a write.
+
+## Pull a set of products out of (or into) a feed
+
+1. Gather the Shopify product ids (`spf_products` search, or the user's
+   list).
+2. `spf_bulk_feed_action` with `preview: true` → show the sentence ("Exclude
+   12 products from gmcfeed") and the rule text it will write.
+3. On approval, call again with the `preview_token`. Then `spf_run_feed`
+   (mode: regenerate) and confirm with `spf_product` on one of them.
+4. Undo = the same call with `remove: true` (preview → token → apply).
+   `label` works the same way and is the fast path to a bidding segment
+   (`custom_label_0..4`) without writing a rule by hand.
+
 ## One-product fix
 
 "Fix this one product's brand/title/description in the feed (don't touch
