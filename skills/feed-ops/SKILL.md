@@ -13,7 +13,7 @@ description: >-
 # Simple Product Feeds — feed operations
 
 Simple Product Feeds (SPF) is a Shopify feed-management app that exposes its
-entire capability to agents: a remote MCP server (16 tools) plus a full REST
+entire capability to agents: a remote MCP server (19 tools) plus a full REST
 API. You diagnose, fix, publish, and verify product feeds in one loop —
 nothing here requires the app's UI.
 
@@ -40,8 +40,8 @@ This skill is intentionally thin. The server carries the current contract
 and updates the moment SPF deploys, so when in doubt, read:
 
 - Tool list + server instructions: arrive automatically with the MCP
-  connection (16 tools as of 2026-08; the list you receive is current).
-- **Version check**: this skill is **v1.2.0**. The live server instructions
+  connection (19 tools as of 2026-10; the list you receive is current).
+- **Version check**: this skill is **v1.3.0**. The live server instructions
   announce the CURRENT SKILL VERSION — if it is newer than this file's
   version, tell the user to run
   `/plugin marketplace update simpleproductfeeds` before relying on the
@@ -56,6 +56,13 @@ and updates the moment SPF deploys, so when in doubt, read:
 
 1. **Read first**: `spf_list_feeds` → `spf_feed_health` → `spf_feed_findings`
    (errors grouped by root cause, with sample rows and Shopify admin links).
+   For product-shaped questions start from the **products** side instead:
+   `spf_products` (the catalog with feed membership — `filter:
+   not_in_any_feed` answers "what is missing everywhere?") and `spf_product`
+   (ONE product across every feed: status `included` / `needs_attention` /
+   `not_in_feed`, the closed `what`, and with `fields: true` each field's
+   Shopify value, feed value and what changed it). "Why isn't X in my feed?"
+   is one `spf_product` call.
 2. **Trace before guessing**: `spf_debug_row` shows one row's complete
    journey — source data, every transformation, exclusion reasons, and the
    per-channel rendered output. If a value looks wrong, the trace shows
@@ -71,6 +78,12 @@ and updates the moment SPF deploys, so when in doubt, read:
    - which source column feeds an output column → `spf_update_mappings`
    - margin-tier custom labels for bidding → `spf_set_margin_tiers` (by
      product category = no cost data needed, or by computed margin band)
+   - a SET of products to add to / exclude from / label on a feed →
+     `spf_bulk_feed_action` (preview: true FIRST — it returns the sentence,
+     the exact rule text and a `preview_token`; show the user; apply with
+     the token; `remove: true` undoes). Exclude and label write ONE tagged
+     rule per feed that grows as ids are added — the merchant sees the same
+     rule on the Rules tab.
 4. **Publish**: `spf_run_feed` (mode: regenerate), poll mode: status until
    completed. `spf_sync_channel` pushes/notifies the channel itself.
 5. **Verify**: re-check `spf_feed_health` / `spf_debug_row`. Close the loop
@@ -78,6 +91,15 @@ and updates the moment SPF deploys, so when in doubt, read:
 
 Every write is recorded in the shop's audit trail — the merchant can always
 see what an agent changed, with what arguments, and when.
+
+## Three ids — know which one you hold
+
+- **Shopify product id** (`spf_products` / `spf_product` / `spf_bulk_feed_action`):
+  one per product, groups all its variants.
+- **Variant row id** (`spf_feed_products` / `spf_debug_row` / `spf_set_cells`
+  / `spf_set_overrides`): one per variant, the row the feed ships.
+- **SKU**: accepted by `spf_product` and the write tools as a convenience.
+`spf_product` accepts all three and tells you the product id to use next.
 
 ## Two vocabularies — read this before writing
 
