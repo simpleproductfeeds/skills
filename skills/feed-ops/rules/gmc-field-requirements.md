@@ -11,11 +11,27 @@ reports a category, this is the domain knowledge behind it.
 - `item_group_id` — groups variants of one product; required whenever
   variants share a product.
 - **GTIN / MPN / brand**: provide `gtin` when the product has one (barcode).
-  Without a GTIN, provide `brand` + `mpn`. When neither exists,
-  `identifier_exists` must be `false` — SPF sets this automatically when
-  GTIN is missing, which downgrades the issue to a warning, not an error.
-  Fabricating GTINs causes disapprovals; prefer honest
-  `identifier_exists=false`.
+  When no GTIN is assigned, use the applicable `brand` + manufacturer-assigned
+  `mpn`; a blank feed cell does not establish that no identifier exists.
+  Set `identifier_exists=false` only when you have confirmed the product has
+  no assigned unique product identifiers. Check supplier/manufacturer evidence
+  and the rendered row before recommending a change. Do not invent GTINs or
+  substitute an arbitrary store SKU for a manufacturer-assigned MPN.
+  Any SPF default or local warning severity is not evidence that Google's
+  requirements are met: if a rendered row has `identifier_exists=false` merely
+  because GTIN is missing, diagnose and correct the actual identifier data.
+  See Google's current [identifier_exists requirements](https://support.google.com/merchants/answer/6324478)
+  and [incorrect product identifier guidance](https://support.google.com/merchants/answer/12158126).
+
+### Review checks (synthetic, not live Merchant Center tests)
+
+- Manufacturer assigned a GTIN, but Shopify barcode is blank: recover the
+  real GTIN and fix its mapping; do not set `identifier_exists=false`.
+- No GTIN assigned, but manufacturer assigned an MPN and brand: preserve
+  those identifiers; missing GTIN alone does not justify a false value.
+- Custom item confirmed to have no assigned identifiers: a false value is
+  appropriate. An unknown supplier record remains a research gap, not proof
+  that identifiers do not exist.
 
 ## URLs and images
 
