@@ -13,7 +13,7 @@ description: >-
 # Simple Product Feeds — feed operations
 
 Simple Product Feeds (SPF) is a Shopify feed-management app that exposes its
-entire capability to agents: a remote MCP server (19 tools) plus a full REST
+entire capability to agents: a remote MCP server (22 tools) plus a full REST
 API. You diagnose, fix, publish, and verify product feeds in one loop —
 nothing here requires the app's UI.
 
@@ -40,8 +40,8 @@ This skill is intentionally thin. The server carries the current contract
 and updates the moment SPF deploys, so when in doubt, read:
 
 - Tool list + server instructions: arrive automatically with the MCP
-  connection (19 tools as of 2026-10; the list you receive is current).
-- **Version check**: this skill is **v1.3.0**. The live server instructions
+  connection (22 tools as of 2026-10; the list you receive is current).
+- **Version check**: this skill is **v1.4.0**. The live server instructions
   announce the CURRENT SKILL VERSION — if it is newer than this file's
   version, tell the user to run
   `/plugin marketplace update simpleproductfeeds` before relying on the
@@ -141,3 +141,5 @@ whole catalog, surface that to the user — do not apply it silently.
 - `rules/channel-quirks.md` — per-channel delivery differences (GMC vs
   Commission Junction vs pull channels)
 - `rules/workflows.md` — proven multi-step recipes + write etiquette
+- Catalog Experiments (holdout tests on a destination) have their own skill:
+  `catalog-experiments`

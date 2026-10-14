@@ -5,9 +5,9 @@ MCP-capable agent: diagnose feed health, trace any row through the
 transformation pipeline, fix issues with preview-first writes, publish, and
 verify — across Google Merchant Center, Commission Junction, and more.
 
-This repo packages the **feed-ops skill** (domain knowledge your agent
-loads on demand) and the **remote MCP server config** for
-[Simple Product Feeds](https://www.simpleproductfeeds.com) (14 tools, full
+This repo packages two skills (domain knowledge your agent loads on demand) —
+**feed-ops** and **catalog-experiments** — and the **remote MCP server config**
+for [Simple Product Feeds](https://www.simpleproductfeeds.com) (22 tools, full
 read + preview-first write surface, per-shop audit trail).
 
 ## Install
@@ -44,6 +44,9 @@ Codex, Cursor, and `.mcp.json` snippets:
 - `skills/feed-ops/rules/` — loaded on demand: pipeline precedence, Google
   Merchant Center field requirements, channel delivery quirks, proven
   workflow recipes.
+- `skills/catalog-experiments/SKILL.md` — the Catalog Experiments
+  conversation: fit check → design → the merchant's yes → start → status →
+  pause / resume / cancel, and what a result may and may not claim.
 - `.mcp.json` — remote server config (`${SPF_API_KEY}` reads from your
   environment; no secret is stored).
 
@@ -61,7 +64,9 @@ install keeps working. Update the skill itself with
 ## Safety model
 
 Reads are free; writes are guarded: rules require a preview token bound to
-the exact rule text (the agent must show you the diff first), overrides and
+the exact rule text (the agent must show you the diff first), an experiment
+starts only with the preview token from its design (the agent reads you the
+sentence first) and cancels only with explicit confirmation, overrides and
 cell edits are undoable, vague requests get proposals rather than changes,
 and every write lands in your shop's audit trail.
 

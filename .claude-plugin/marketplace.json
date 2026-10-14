@@ -9,7 +9,7 @@
     {
       "name": "simple-product-feeds",
       "source": "./",
-      "description": "Feed-ops skill + remote MCP server config: diagnose, trace, fix (preview-first), publish, and verify Shopify product feeds across Google Merchant Center, Commission Junction, and more."
+      "description": "Feed-ops and catalog-experiments skills + remote MCP server config: diagnose, trace, fix (preview-first), publish, and verify Shopify product feeds across Google Merchant Center, Commission Junction, and more; run Catalog Experiments."
     }
   ]
 }
