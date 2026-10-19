@@ -28,8 +28,12 @@ app's UI.
 Connection, the version check and the live sources of truth are the same as the
 `feed-ops` skill (this plugin, **v1.4.0**). The tool descriptions you receive
 from the server are the current contract; prefer them when they differ from
-this file. The tools work only on stores where Catalog Experiments is enabled —
-otherwise every call returns the same "not enabled" text; say so and stop.
+this file. Designing, starting, resuming and reading results work only on
+stores where Catalog Experiments is enabled — otherwise those calls return the
+same "not enabled" text; say so and stop. Pausing or cancelling an existing
+experiment always works, so the feed can be put back even after enablement is
+removed: when the merchant asks for it, do it (cancel still only when they name
+it, with `confirm: true`).
 
 ## The conversation
 
