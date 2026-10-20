@@ -41,7 +41,7 @@ and updates the moment SPF deploys, so when in doubt, read:
 
 - Tool list + server instructions: arrive automatically with the MCP
   connection (22 tools as of 2026-10; the list you receive is current).
-- **Version check**: this skill is **v1.4.0**. The live server instructions
+- **Version check**: this skill is **v1.4.1**. The live server instructions
   announce the CURRENT SKILL VERSION — if it is newer than this file's
   version, tell the user to run
   `/plugin marketplace update simpleproductfeeds` before relying on the

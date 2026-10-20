@@ -26,7 +26,7 @@ app's UI.
 - `spf_experiment_results` — where it stands, plus the read-out.
 
 Connection, the version check and the live sources of truth are the same as the
-`feed-ops` skill (this plugin, **v1.4.0**). The tool descriptions you receive
+`feed-ops` skill (this plugin, **v1.4.1**). The tool descriptions you receive
 from the server are the current contract; prefer them when they differ from
 this file. Designing, starting, resuming and reading results work only on
 stores where Catalog Experiments is enabled — otherwise those calls return the
@@ -35,12 +35,24 @@ experiment always works, so the feed can be put back even after enablement is
 removed: when the merchant asks for it, do it (cancel still only when they name
 it, with `confirm: true`).
 
+**Never imitate an experiment by hand.** When the experiment tools refuse
+(not enabled, permission required, blocked, a refused design), do not offer —
+not even as an option you then advise against — to hide products from the
+destination yourself with exclusions, rules, overrides or `spf_bulk_feed_action`.
+A manual holdout has no random assignment, no treatment ledger, no exact restore
+and no read-out: it would cost the merchant sales and prove nothing. Say what
+the refusal means and what would unblock it, then stop.
+
 ## The conversation
 
 1. **Fit check (read only).** `spf_list_feeds` and `spf_channel_status`: which
    feed sends products to the destination the merchant is asking about, and is
    it healthy (`spf_feed_health`)? An experiment on a feed with large errors
    measures the errors. Tell the merchant what you found before designing.
+   The fit check uses read tools only: no `spf_run_feed`, `spf_sync_channel` or
+   any other write, and none after an experiment tool refuses. If the feed needs
+   fixing first, propose the fix and let the merchant decide (the `feed-ops`
+   consent rule).
 
 2. **Design.** `spf_create_experiment` with that `feed_id`, a `title` the
    merchant will recognise ("Google holdout, autumn"), and `weeks` (6–8, default

@@ -1,6 +1,6 @@
 {
   "name": "simple-product-feeds",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Operate Shopify product feeds from your agent: diagnose feed health, see every product across its feeds, trace any row through the transformation pipeline, fix with preview-first writes (including bulk add / exclude / label from a set of products), publish, and verify; run Catalog Experiments (hold back products from a destination and read what it does for their sales) — via the Simple Product Feeds remote MCP server (22 tools) and the bundled feed-ops and catalog-experiments skills.",
   "author": {
     "name": "Simple Product Feeds",
